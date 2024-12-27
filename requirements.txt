@@ -1,0 +1,6 @@
+requests
+psutil
+python-telegram-bot==20.0a3
+aiohttp==3.8.1
+python-dotenv==0.19.1
+nest_asyncio==1.5.4

@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  raspberry-telegram-monitor:
+    build: .
+    container_name: raspberry-telegram-monitor
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./log:/app/log
