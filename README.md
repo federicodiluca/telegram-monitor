@@ -47,7 +47,7 @@ LOG_RETENTION_DAYS=7
 
     ```sh
     git clone <repository-url>
-    cd telegram-raspberry-monitor
+    cd telegram-monitor
     ```
 
 2. Create the `.env` file from the `.example.env` file:
