@@ -3,10 +3,11 @@ import time
 import requests
 import asyncio
 import nest_asyncio
+import json
 from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, ContextTypes
 from bot import start, ip, log, metrics, register_handlers
-from utils import fetch_public_ip, log_ip_check, log_ip_change
+from utils import fetch_public_ip, log_ip_check, log_ip_change, load_ip_info, save_ip_info
 import logging
 
 # Configure logging
@@ -25,6 +26,10 @@ current_ip_info = None
 async def check_ip_change():
     global current_ip_info
     bot = Bot(token=TOKEN)
+
+    # Carica l'IP persistito all'avvio
+    current_ip_info = load_ip_info()
+
     while True:
         new_ip_info = fetch_public_ip()
         if new_ip_info:
@@ -38,7 +43,9 @@ async def check_ip_change():
                 new_info = "\n".join([f"{key}: {value}" for key, value in new_ip_info.items()])
                 message = f"IP CAMBIATO DA {old_ip} A {new_ip}\n\nVecchie Info:\n{old_info}\n\nNuove Info:\n{new_info}"
                 await bot.send_message(chat_id=CHAT_ID, text=message)
+            # Aggiorna l'IP corrente e salva su file
             current_ip_info = new_ip_info
+            save_ip_info(current_ip_info)
         await asyncio.sleep(POLLING_INTERVAL)
 
 async def main():

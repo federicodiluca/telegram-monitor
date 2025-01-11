@@ -86,6 +86,7 @@ LOG_RETENTION_DAYS=7
 ├── .env
 ├── .example.env
 ├── .gitignore
+├── current_ip.json
 ├── README.md
 ├── requirements.txt
 ├── src

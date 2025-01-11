@@ -7,3 +7,4 @@ services:
       - .env
     volumes:
       - ./log:/app/log
+      - ./current_ip.json:/app/current_ip.json

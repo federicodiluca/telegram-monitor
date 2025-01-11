@@ -5,8 +5,8 @@ import shutil
 import psutil
 import datetime
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+IP_FILE = "current_ip.json"  # File per memorizzare l'IP corrente
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s') # Configure logging
 
 def fetch_public_ip():
     """Fetch the public IP address from ipinfo.io."""
@@ -20,6 +20,22 @@ def fetch_public_ip():
     except requests.RequestException as e:
         logging.error(f"Error fetching IP: {e}")
         return None
+
+def load_ip_info():
+    """Carica l'IP corrente dal file."""
+    if os.path.exists(IP_FILE):
+        with open(IP_FILE, "r") as file:
+            try:
+                return json.load(file)
+            except json.JSONDecodeError:
+                logging.warning("Impossibile decodificare il file IP, sarà ricreato.")
+                return None
+    return None
+
+def save_ip_info(ip_info):
+    """Salva l'IP corrente nel file."""
+    with open(IP_FILE, "w") as file:
+        json.dump(ip_info, file)
 
 def ensure_log_directory(log_dir):
     """Ensure the log directory exists."""
