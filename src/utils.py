@@ -1,9 +1,9 @@
 import requests
 import logging
 import os
-import shutil
 import psutil
 import datetime
+import json
 
 IP_FILE = "current_ip.json"  # File per memorizzare l'IP corrente
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s') # Configure logging

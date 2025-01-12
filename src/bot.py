@@ -1,9 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes, Application, CommandHandler
 from utils import fetch_public_ip, get_system_metrics, ensure_log_directory, get_log_file_path
-import logging
 import os
-import datetime
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Inizializza il bot e invia un messaggio di benvenuto."""

@@ -1,9 +1,6 @@
 import os
-import time
-import requests
 import asyncio
 import nest_asyncio
-import json
 from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, ContextTypes
 from bot import start, ip, log, metrics, register_handlers
